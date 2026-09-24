@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>AUTOSOLAR — стремянки для ГАЗ, ПАЗ, УАЗ и ГАЗон</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="topbar">
+    <div class="container topbar__content">
+      <div class="topbar__left">
+        <span>📍 Нижний Новгород</span>
+        <span>Пн–Пт: 08:00–15:00</span>
+      </div>
+
+      <div class="topbar__right">
+        <a href="tel:+79047980795">+7 (904) 798-07-95</a>
+        <a href="#contacts">Контакты</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="header">
+    <div class="container header__content">
+
+      <a href="#home" class="logo">
+        <span class="logo__icon">A</span>
+
+        <span class="logo__text">
+          <strong>AUTOSOLAR</strong>
+          <small>стремянки для коммерческого транспорта</small>
+        </span>
+      </a>
+
+      <form class="search" id="searchForm">
+        <input
+          id="searchInput"
+          type="search"
+          placeholder="Поиск: ГАЗ, ПАЗ, МАЗ, УАЗ, ЗИЛ, прицеп..."
+          autocomplete="off"
+        >
+
+        <button type="submit">Найти</button>
+      </form>
+
+    </div>
+  </header>
+
+  <main id="home">
+
+    <section class="hero container">
+      <div class="hero__main">
+        <div class="hero__content">
+          <span class="hero__label">ПРОИЗВОДСТВО В РОССИИ</span>
+
+          <h1>Стремянки для ГАЗ, ПАЗ, МАЗ, УАЗ, ЗИЛ, прицеп</h1>
+
+          <p>
+            Прочные металлические стремянки для коммерческого транспорта.
+            Подбор по марке и модели автомобиля, доставка по России.
+          </p>
+
+          <button class="hero__button" type="button" id="heroCatalogButton">
+            Перейти к каталогу
+          </button>
+        </div>
+      </div>
+
+      <div class="hero__side">
+
+        <article class="small-banner small-banner--orange">
+          <div>
+            <span>Товар месяца</span>
+            <h3>Стремянка на ГАЗель NEXT</h3>
+
+            <button
+              class="banner-link"
+              type="button"
+              data-category="gaz-kuzov"
+            >
+              Смотреть →
+            </button>
+          </div>
+
+          <div class="small-banner__icon">🚛</div>
+        </article>
+
+        <article class="small-banner small-banner--dark">
+          <div>
+            <span>Для оптовых клиентов</span>
+            <h3>Специальные цены</h3>
+
+            <a class="banner-link" href="#contacts">
+              Получить предложение →
+            </a>
+          </div>
+
+          <div class="small-banner__icon">📦</div>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="categories container" id="categories">
+
+      <button class="category-card" type="button" data-category="all">
+        <span class="category-card__icon">🚛</span>
+        <span>Все товары</span>
+      </button>
+
+      <button
+        class="category-card"
+        type="button"
+        data-category="gaz-kuzov"
+      >
+        <span class="category-card__icon">🚛</span>
+        <span>ГАЗ<br>(кузовная)</span>
+      </button>
+
+      <button
+        class="category-card"
+        type="button"
+        data-category="gaz-ressor"
+      >
+        <span class="category-card__icon">🚚</span>
+        <span>ГАЗ<br>(рессорная)</span>
+      </button>
+
+      <button class="category-card" type="button" data-category="paz">
+        <span class="category-card__icon">🚌</span>
+        <span>ПАЗ</span>
+      </button>
+
+      <button class="category-card" type="button" data-category="maz">
+        <span class="category-card__icon">🚛</span>
+        <span>МАЗ</span>
+      </button>
+
+      <button class="category-card" type="button" data-category="uaz">
+        <span class="category-card__icon">🚙</span>
+        <span>УАЗ</span>
+      </button>
+
+      <button class="category-card" type="button" data-category="zil">
+        <span class="category-card__icon">🚚</span>
+        <span>ЗИЛ</span>
+      </button>
+
+      <button
+        class="category-card"
+        type="button"
+        data-category="trailer"
+      >
+        <span class="category-card__icon">🚑</span>
+        <span>Прицеп</span>
+      </button>
+
+    </section>
+
+    <section class="catalog-section container" id="catalog">
+
+      <div class="section-heading">
+        <div>
+          <span class="section-heading__label">КАТАЛОГ AUTOSOLAR</span>
+
+          <h2 id="catalogTitle">Все товары</h2>
+
+          <p class="catalog-description" id="catalogDescription">
+            Выберите подходящую стремянку для вашего автомобиля.
+          </p>
+        </div>
+
+        <button class="section-link" type="button" id="showAllButton">
+          Показать все →
+        </button>
+      </div>
+
+      <div class="search-result" id="searchResult"></div>
+
+      <div class="products-grid" id="productsGrid">
+        <p class="catalog-loading">
+          Загружаем каталог AUTOSOLAR...
+        </p>
+      </div>
+
+      <div class="empty-state" id="emptyState">
+        <h3>Товары не найдены</h3>
+
+        <p>
+          Попробуйте изменить запрос или выберите другую категорию.
+        </p>
+
+        <button type="button" id="resetFiltersButton">
+          Показать все товары
+        </button>
+      </div>
+
+    </section>
+
+    <section class="benefits">
+      <div class="container">
+
+        <div class="section-heading section-heading--light">
+          <div>
+            <span class="section-heading__label">
+              ПОЧЕМУ ВЫБИРАЮТ НАС
+            </span>
+
+            <h2>Преимущества AUTOSOLAR</h2>
+          </div>
+        </div>
+
+        <div class="benefits-grid">
+
+          <article class="benefit">
+            <span class="benefit__icon">🏭</span>
+            <h3>Собственное производство</h3>
+            <p>
+              Контролируем качество материалов, сварки и защитного покрытия.
+            </p>
+          </article>
+
+          <article class="benefit">
+            <span class="benefit__icon">✅</span>
+            <h3>Надёжная конструкция</h3>
+            <p>
+              Используем прочную сталь для долговечной эксплуатации.
+            </p>
+          </article>
+
+          <article class="benefit">
+            <span class="benefit__icon">🚚</span>
+            <h3>Доставка по России</h3>
+            <p>
+              Отправляем заказы транспортными компаниями в регионы.
+            </p>
+          </article>
+
+          <article class="benefit">
+            <span class="benefit__icon">🔧</span>
+            <h3>Помощь с подбором</h3>
+            <p>
+              Поможем выбрать модель по марке, году и модификации автомобиля.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="contacts container" id="contacts">
+      <div class="contacts__info">
+        <span class="section-heading__label">
+          НУЖНА КОНСУЛЬТАЦИЯ?
+        </span>
+
+        <h2>Поможем подобрать стремянку</h2>
+
+        <p>
+          Оставьте заявку или позвоните нам. Укажите марку, модель и год
+          автомобиля — мы подберём подходящий вариант.
+        </p>
+
+        <a class="contacts__phone" href="tel:+79047980795">
+          +7 (904) 798-07-95
+        </a>
+      </div>
+
+      <form class="contact-form" id="contactForm">
+        <input
+          type="text"
+          id="clientName"
+          placeholder="Ваше имя"
+          required
+        >
+
+        <input
+          type="tel"
+          id="clientPhone"
+          placeholder="Телефон"
+          required
+        >
+
+        <select id="clientCar" required>
+          <option value="">Выберите автомобиль</option>
+          <option>ГАЗ (кузовная)</option>
+          <option>ГАЗ (рессорная)</option>
+          <option>ПАЗ</option>
+          <option>МАЗ</option>
+          <option>УАЗ</option>
+          <option>ЗИЛ</option>
+          <option>Прицеп</option>
+        </select>
+
+        <button type="submit">Отправить заявку</button>
+
+        <p class="form-message" id="formMessage"></p>
+      </form>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__grid">
+
+      <div>
+        <a href="#home" class="logo logo--footer">
+          <span class="logo__icon">A</span>
+
+          <span class="logo__text">
+            <strong>AUTOSOLAR</strong>
+            <small>стремянки для коммерческого транспорта</small>
+          </span>
+        </a>
+
+        <p class="footer__description">
+          Производство и продажа стремянок для ГАЗ, ПАЗ, МАЗ, УАЗ,
+          ЗИЛ и прицепов.
+        </p>
+      </div>
+
+      <div>
+        <h4>Каталог</h4>
+
+        <button type="button" data-category="all">
+          Все товары
+        </button>
+
+        <button type="button" data-category="gaz-kuzov">
+          ГАЗ кузовная
+        </button>
+
+        <button type="button" data-category="gaz-ressor">
+          ГАЗ рессорная
+        </button>
+
+        <button type="button" data-category="paz">
+          ПАЗ
+        </button>
+
+        <button type="button" data-category="maz">
+          МАЗ
+        </button>
+
+        <button type="button" data-category="uaz">
+          УАЗ
+        </button>
+
+        <button type="button" data-category="zil">
+          ЗИЛ
+        </button>
+
+        <button type="button" data-category="trailer">
+          Прицеп
+        </button>
+      </div>
+
+      <div>
+        <h4>Покупателям</h4>
+        <a href="#contacts">Доставка и оплата</a>
+        <a href="#contacts">Гарантия и возврат</a>
+        <a href="#contacts">Контакты</a>
+      </div>
+
+      <div>
+        <h4>Связаться с нами</h4>
+
+        <a href="tel:+79047980795" class="footer__phone">
+          +7 (904) 798-07-95
+        </a>
+
+        <p>Нижний Новгород</p>
+        <p>info@autosolar.ru</p>
+      </div>
+
+    </div>
+
+    <div class="container footer__bottom">
+      <span>© 2026 AUTOSOLAR. Все права защищены.</span>
+      <a href="#">Политика конфиденциальности</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
