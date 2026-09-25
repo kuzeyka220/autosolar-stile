@@ -1474,3 +1474,29 @@ button {
 .category-card.active .category-card__icon {
   transform: scale(1.08);
 }
+
+
+/* Размер фотографий в карточках каталога */
+.product-card__image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  padding: 12px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.product-card__image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.contacts__links{
+	display:flex;
+	flex-direction:column;
+}
+.contacts__email{
+	font-weight: 700;
+}
