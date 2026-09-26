@@ -157,23 +157,85 @@ function createProductCard(product) {
   const title = product.title || "Товар AUTOSOLAR";
   const brand = product.brand || "AUTOSOLAR";
   const article = product.vendor_code || "—";
-  const wbUrl = product.wb_url || "#";
+
+  const wbUrl = product.wb_url ? product.wb_url.trim() : "";
+  const ozonUrl = product.ozon_url ? product.ozon_url.trim() : "";
+
+  const imageLink = wbUrl || ozonUrl || "";
+
+  const imageContent = `
+    <img
+      src="${escapeHtml(imageUrl)}"
+      alt="${escapeHtml(title)}"
+      loading="lazy"
+    >
+  `;
+
+  const productImage = imageLink
+    ? `
+      <a
+        class="product-card__image"
+        href="${escapeHtml(imageLink)}"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Открыть товар «${escapeHtml(title)}»"
+      >
+        ${imageContent}
+      </a>
+    `
+    : `
+      <div class="product-card__image">
+        ${imageContent}
+      </div>
+    `;
+
+  const marketplaceButtons = `
+    <div class="marketplace-buttons">
+      ${
+        wbUrl
+          ? `
+            <a
+              class="marketplace-btn marketplace-btn--wb"
+              href="${escapeHtml(wbUrl)}"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Купить на WB
+            </a>
+          `
+          : ""
+      }
+
+      ${
+        ozonUrl
+          ? `
+            <a
+              class="marketplace-btn marketplace-btn--ozon"
+              href="${escapeHtml(ozonUrl)}"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Купить на Ozon
+            </a>
+          `
+          : ""
+      }
+
+      ${
+        !wbUrl && !ozonUrl
+          ? `
+            <span class="marketplace-btn marketplace-btn--unavailable">
+              Нет в наличии
+            </span>
+          `
+          : ""
+      }
+    </div>
+  `;
 
   return `
     <article class="product-card">
-      <a
-        class="product-card__image"
-        href="${escapeHtml(wbUrl)}"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Открыть товар «${escapeHtml(title)}» на Wildberries"
-      >
-        <img
-          src="${escapeHtml(imageUrl)}"
-          alt="${escapeHtml(title)}"
-          loading="lazy"
-        >
-      </a>
+      ${productImage}
 
       <p class="product-card__brand">
         ${escapeHtml(brand)}
@@ -187,14 +249,7 @@ function createProductCard(product) {
         Артикул: ${escapeHtml(article)}
       </p>
 
-      <a
-        class="marketplace-btn marketplace-btn--wb"
-        href="${escapeHtml(wbUrl)}"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Купить на Wildberries
-      </a>
+      ${marketplaceButtons}
     </article>
   `;
 }

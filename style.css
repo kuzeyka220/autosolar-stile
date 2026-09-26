@@ -593,7 +593,7 @@ button {
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 320px;
+  height: 375px;
   flex-shrink: 0;
   margin-bottom: 15px;
   padding: 0;
@@ -1433,5 +1433,65 @@ button {
 
   .marketplace-btn {
     font-size: 10px;
+  }
+}
+
+
+.marketplace-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.marketplace-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 11px 14px;
+  border-radius: 10px;
+  border: none;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.marketplace-btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+.marketplace-btn--wb {
+  flex: 1;
+  color: #ffffff;
+  background: linear-gradient(135deg, #a73afd 0%, #6b21c7 100%);
+}
+
+.marketplace-btn--ozon {
+  flex: 1;
+  color: #ffffff;
+  background: #005bff;
+}
+
+.marketplace-btn--unavailable {
+  width: 100%;
+  color: #707070;
+  background: #eeeeee;
+  cursor: default;
+}
+
+@media (max-width: 480px) {
+  .marketplace-buttons {
+    flex-direction: column;
+  }
+
+  .marketplace-btn {
+    width: 100%;
   }
 }
